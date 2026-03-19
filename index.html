@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordle Escolar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- INICIO -->
+<div id="inicio" class="pantalla">
+  <div class="inicio-inner">
+    <div class="logo-area">
+      <span class="logo-icono">🎓</span>
+      <h1 class="titulo">Wordle<span class="titulo-acento">Escolar</span></h1>
+    </div>
+    <div class="instrucciones">
+      <p class="intro-text">Adiviná la palabra del colegio en 6 intentos.</p>
+      <div class="reglas">
+        <div class="regla"><span class="chip verde">A</span> Letra en posición correcta</div>
+        <div class="regla"><span class="chip amarillo">A</span> Letra en otra posición</div>
+        <div class="regla"><span class="chip gris">A</span> Letra no está en la palabra</div>
+      </div>
+      <p class="intro-text-small">En multijugador, compiten hasta <strong>3 puntos</strong>. Cada jugador ingresa su intento por turno.</p>
+    </div>
+    <button class="btn btn-primary" onclick="irMenu()">¡Jugar!</button>
+  </div>
+</div>
+
+<!-- MENU -->
+<div id="menu" class="pantalla oculto">
+  <div class="menu-inner">
+    <h2 class="subtitulo">¿Cómo querés jugar?</h2>
+    <div class="menu-botones">
+      <button class="btn btn-modo" onclick="modoIndividual()">
+        <span class="modo-icono">👤</span>
+        <span class="modo-nombre">Individual</span>
+        <span class="modo-desc">Adiviná solo</span>
+      </button>
+      <button class="btn btn-modo" onclick="modoMulti()">
+        <span class="modo-icono">👥</span>
+        <span class="modo-nombre">Multijugador</span>
+        <span class="modo-desc">Competí contra un amigo</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- INDIVIDUAL -->
+<div id="juego" class="pantalla oculto">
+  <div class="juego-header">
+    <button class="btn btn-small" onclick="irMenu()">← Menú</button>
+    <h2 class="subtitulo">Modo Individual</h2>
+    <button class="btn btn-small" onclick="reiniciar()">↺ Reiniciar</button>
+  </div>
+  <div id="tablero" class="tablero"></div>
+  <p id="mensaje" class="mensaje"></p>
+  <div id="botonesJuego" class="botones-fin oculto">
+    <button class="btn btn-primary" onclick="reiniciar()">Volver a jugar</button>
+    <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
+  </div>
+</div>
+
+<!-- MULTI -->
+<div id="multi" class="pantalla oculto">
+  <div class="multi-header">
+    <button class="btn btn-small" onclick="irMenu()">← Menú</button>
+    <h2 class="subtitulo">Multijugador</h2>
+    <button class="btn btn-small" onclick="reiniciarMulti()">↺ Nueva ronda</button>
+  </div>
+
+  <div class="scores">
+    <div class="score-jugador" id="scoreJ1">
+      <span class="score-nombre">Jugador 1</span>
+      <span class="score-puntos" id="p1">0</span>
+    </div>
+    <div class="score-sep">VS</div>
+    <div class="score-jugador" id="scoreJ2">
+      <span class="score-nombre">Jugador 2</span>
+      <span class="score-puntos" id="p2">0</span>
+    </div>
+  </div>
+
+  <p id="turnoTexto" class="turno-texto"></p>
+  <p id="mensajeMulti" class="mensaje"></p>
+
+  <div class="contenedor-multi">
+    <div class="panel-jugador" id="panelJ1">
+      <div id="tablero1" class="tablero"></div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="panel-jugador" id="panelJ2">
+      <div id="tablero2" class="tablero"></div>
+    </div>
+  </div>
+
+  <div id="botonesMulti" class="botones-fin oculto">
+    <button class="btn btn-primary" onclick="reiniciarMulti()">Siguiente ronda</button>
+    <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
