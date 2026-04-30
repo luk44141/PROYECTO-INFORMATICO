@@ -300,6 +300,8 @@ function reiniciarMulti(longitud) {
 
   crearTablero(tablero1, palabra.length);
   crearTablero(tablero2, palabra.length);
+  tablero1.style.setProperty('--cols', palabra.length);
+  tablero2.style.setProperty('--cols', palabra.length);
 
   actualizarTurnoUI();
 }
