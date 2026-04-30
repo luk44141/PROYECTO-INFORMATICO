@@ -4,126 +4,132 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wordle Escolar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- INICIO -->
-<div id="inicio" class="pantalla">
-  <div class="inicio-inner">
-    <div class="logo-area">
-      <span class="logo-icono">🎓</span>
-      <h1 class="titulo">Wordle<span class="titulo-acento">Escolar</span></h1>
+<div class="app">
+
+  <!-- INICIO -->
+  <section id="inicio" class="pantalla">
+    <div class="card">
+      <div class="logo-badge"><span>✏️ Juego educativo</span></div>
+
+      <h1 class="titulo">Wordle <span class="titulo-acento">Escolar</span></h1>
+
+      <div class="divider"></div>
+
+      <p class="desc">Adiviná la palabra oculta en 6 intentos. Cada letra revelará pistas.</p>
+
+      <button class="btn btn-primary" onclick="irMenu()">Empezar a jugar</button>
     </div>
-    <div class="instrucciones">
-      <p class="intro-text">Adiviná la palabra del colegio en 6 intentos.</p>
-      <div class="reglas">
-        <div class="regla"><span class="chip verde">A</span> Letra en posición correcta</div>
-        <div class="regla"><span class="chip amarillo">A</span> Letra en otra posición</div>
-        <div class="regla"><span class="chip gris">A</span> Letra no está en la palabra</div>
+  </section>
+
+  <!-- MENÚ -->
+  <section id="menu" class="pantalla oculto">
+    <div class="card">
+      <h2 class="subtitulo">¿Cómo jugás?</h2>
+      <p class="desc">Elegí tu modo de juego</p>
+
+      <div class="divider"></div>
+
+      <div class="menu-botones">
+        <button class="btn btn-secondary" onclick="irSelector('individual')">
+          <span class="menu-icono">👤</span> Individual
+        </button>
+        <button class="btn btn-secondary" onclick="irSelector('multi')">
+          <span class="menu-icono">👥</span> Multijugador
+        </button>
       </div>
-      <p class="intro-text-small">En multijugador, compiten hasta <strong>3 puntos</strong>. Cada jugador ingresa su intento por turno.</p>
     </div>
-    <button class="btn btn-primary" onclick="irMenu()">¡Jugar!</button>
-  </div>
-</div>
+  </section>
 
-<!-- MENU -->
-<div id="menu" class="pantalla oculto">
-  <div class="menu-inner">
-    <h2 class="subtitulo">¿Cómo querés jugar?</h2>
-    <div class="menu-botones">
-      <button class="btn btn-modo" onclick="irSelector('individual')">
-        <span class="modo-icono">👤</span>
-        <span class="modo-nombre">Individual</span>
-        <span class="modo-desc">Adiviná solo</span>
-      </button>
-      <button class="btn btn-modo" onclick="irSelector('multi')">
-        <span class="modo-icono">👥</span>
-        <span class="modo-nombre">Multijugador</span>
-        <span class="modo-desc">Competí contra un amigo</span>
-      </button>
-    </div>
-  </div>
-</div>
+  <!-- SELECTOR -->
+  <section id="selector" class="pantalla oculto">
+    <div class="card">
+      <button class="btn btn-small btn-secondary" onclick="irMenu()">← Volver</button>
 
-<!-- SELECTOR DE LETRAS -->
-<div id="selector" class="pantalla oculto">
-  <div class="selector-inner">
-    <button class="btn btn-small back-btn" onclick="irMenu()">← Menú</button>
-    <div class="selector-header">
-      <span class="selector-icono" id="selectorIcono">👤</span>
-      <h2 class="subtitulo" id="selectorTitulo">Modo Individual</h2>
+      <div id="selectorIcono"></div>
+      <h2 class="subtitulo" id="selectorTitulo">Modo</h2>
+
+      <div class="divider"></div>
+
+      <select id="cantLetras" class="dropdown">
+        <option value="">¿Cuántas letras?</option>
+        <option value="4">4 letras</option>
+        <option value="5">5 letras</option>
+        <option value="6">6 letras</option>
+        <option value="7">7 letras</option>
+        <option value="8">8 letras</option>
+      </select>
+
+      <p id="selectorHint"></p>
+
+      <button class="btn btn-primary" onclick="iniciarDesdeSelector()">¡Jugar!</button>
     </div>
-    <div class="selector-card">
-      <p class="selector-label">¿Cuántas letras querés que tenga la palabra?</p>
-      <div class="dropdown-wrapper">
-        <select id="cantLetras" class="dropdown">
-          <option value="" disabled selected>Elegí una opción…</option>
-          <option value="4">4 letras</option>
-          <option value="5">5 letras</option>
-          <option value="6">6 letras</option>
-          <option value="7">7 letras</option>
-          <option value="8">8 letras</option>
-        </select>
-        <span class="dropdown-arrow">▾</span>
+  </section>
+
+  <!-- JUEGO INDIVIDUAL -->
+  <section id="juego" class="pantalla oculto">
+    <div class="card grande">
+      <div class="header">
+        <button class="btn btn-small btn-secondary" onclick="irMenu()">←</button>
+        <h2>Individual</h2>
+        <button class="btn btn-small btn-secondary" onclick="reiniciar()" title="Nueva palabra">↺</button>
       </div>
-      <p class="selector-hint" id="selectorHint"></p>
-      <button class="btn btn-primary selector-btn" id="btnIniciarJuego" onclick="iniciarDesdeSelector()">Empezar a jugar →</button>
-    </div>
-  </div>
-</div>
 
-<!-- INDIVIDUAL -->
-<div id="juego" class="pantalla oculto">
-  <div class="juego-header">
-    <button class="btn btn-small" onclick="irMenu()">← Menú</button>
-    <h2 class="subtitulo">Modo Individual</h2>
-    <button class="btn btn-small" onclick="reiniciar()">↺ Reiniciar</button>
-  </div>
-  <div id="tablero" class="tablero"></div>
-  <p id="mensaje" class="mensaje"></p>
-  <div id="botonesJuego" class="botones-fin oculto">
-    <button class="btn btn-primary" onclick="reiniciar()">Volver a jugar</button>
-    <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
-  </div>
-</div>
+      <div class="divider"></div>
 
-<!-- MULTI -->
-<div id="multi" class="pantalla oculto">
-  <div class="multi-header">
-    <button class="btn btn-small" onclick="irMenu()">← Menú</button>
-    <h2 class="subtitulo">Multijugador</h2>
-    <button class="btn btn-small" onclick="reiniciarMulti()">↺ Nueva ronda</button>
-  </div>
-  <div class="scores">
-    <div class="score-jugador" id="scoreJ1">
-      <span class="score-nombre">Jugador 1</span>
-      <span class="score-puntos" id="p1">0</span>
+      <div id="tablero" class="tablero"></div>
+
+      <p id="mensaje" class="mensaje"></p>
+
+      <div id="botonesJuego" class="oculto">
+        <button class="btn btn-primary" onclick="reiniciar()">Otra vez</button>
+        <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
+      </div>
     </div>
-    <div class="score-sep">VS</div>
-    <div class="score-jugador" id="scoreJ2">
-      <span class="score-nombre">Jugador 2</span>
-      <span class="score-puntos" id="p2">0</span>
+  </section>
+
+  <!-- JUEGO MULTI -->
+  <section id="multi" class="pantalla oculto">
+    <div class="card grande">
+
+      <div class="header">
+        <button class="btn btn-small btn-secondary" onclick="irMenu()">←</button>
+        <h2>Multijugador</h2>
+        <button class="btn btn-small btn-secondary" onclick="reiniciarMulti()" title="Reiniciar">↺</button>
+      </div>
+
+      <div class="scores-bar">
+        <div class="score-panel" id="panelJ1">
+          <span class="score-label">Jugador 1</span>
+          <span class="score-num" id="p1">0</span>
+        </div>
+        <span class="score-vs">VS</span>
+        <div class="score-panel" id="panelJ2">
+          <span class="score-label">Jugador 2</span>
+          <span class="score-num" id="p2">0</span>
+        </div>
+      </div>
+
+      <p id="turnoTexto" class="turno-texto"></p>
+      <p id="mensajeMulti" class="mensaje"></p>
+
+      <div class="multi">
+        <div id="tablero1" class="tablero"></div>
+        <div id="tablero2" class="tablero"></div>
+      </div>
+
+      <div id="botonesMulti" class="oculto">
+        <button class="btn btn-primary" onclick="reiniciarMulti()">Siguiente ronda</button>
+        <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
+      </div>
+
     </div>
-  </div>
-  <p id="turnoTexto" class="turno-texto"></p>
-  <p id="mensajeMulti" class="mensaje"></p>
-  <div class="contenedor-multi">
-    <div class="panel-jugador" id="panelJ1">
-      <div id="tablero1" class="tablero"></div>
-    </div>
-    <div class="divider-v"></div>
-    <div class="panel-jugador" id="panelJ2">
-      <div id="tablero2" class="tablero"></div>
-    </div>
-  </div>
-  <div id="botonesMulti" class="botones-fin oculto">
-    <button class="btn btn-primary" onclick="reiniciarMulti()">Siguiente ronda</button>
-    <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
-  </div>
+  </section>
+
 </div>
 
 <script src="script.js"></script>
