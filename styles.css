@@ -101,7 +101,7 @@ body::before {
 }
 
 .card.grande {
-  max-width: 640px;
+  max-width: min(96vw, 900px);
 }
 
 @keyframes cardIn {
@@ -395,9 +395,22 @@ body::before {
 /* ─── MULTI ─── */
 .multi {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  width: 100%;
+  overflow: hidden;
+}
+
+.multi .tablero {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.multi .fila {
+  width: 100%;
+  justify-content: center;
 }
 
 /* ─── SCORES ─── */
@@ -487,7 +500,10 @@ body::before {
     border-radius: 9px;
   }
 
-  .multi { gap: 14px; }
+  .multi { gap: 8px; }
+
+  .multi .fila { gap: 5px; }
+  .multi .tablero { gap: 5px; }
 }
 
 @media (max-width: 400px) {
