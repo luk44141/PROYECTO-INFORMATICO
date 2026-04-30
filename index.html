@@ -35,16 +35,43 @@
   <div class="menu-inner">
     <h2 class="subtitulo">¿Cómo querés jugar?</h2>
     <div class="menu-botones">
-      <button class="btn btn-modo" onclick="modoIndividual()">
+      <button class="btn btn-modo" onclick="irSelector('individual')">
         <span class="modo-icono">👤</span>
         <span class="modo-nombre">Individual</span>
         <span class="modo-desc">Adiviná solo</span>
       </button>
-      <button class="btn btn-modo" onclick="modoMulti()">
+      <button class="btn btn-modo" onclick="irSelector('multi')">
         <span class="modo-icono">👥</span>
         <span class="modo-nombre">Multijugador</span>
         <span class="modo-desc">Competí contra un amigo</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- SELECTOR DE LETRAS -->
+<div id="selector" class="pantalla oculto">
+  <div class="selector-inner">
+    <button class="btn btn-small back-btn" onclick="irMenu()">← Menú</button>
+    <div class="selector-header">
+      <span class="selector-icono" id="selectorIcono">👤</span>
+      <h2 class="subtitulo" id="selectorTitulo">Modo Individual</h2>
+    </div>
+    <div class="selector-card">
+      <p class="selector-label">¿Cuántas letras querés que tenga la palabra?</p>
+      <div class="dropdown-wrapper">
+        <select id="cantLetras" class="dropdown">
+          <option value="" disabled selected>Elegí una opción…</option>
+          <option value="4">4 letras</option>
+          <option value="5">5 letras</option>
+          <option value="6">6 letras</option>
+          <option value="7">7 letras</option>
+          <option value="8">8 letras</option>
+        </select>
+        <span class="dropdown-arrow">▾</span>
+      </div>
+      <p class="selector-hint" id="selectorHint"></p>
+      <button class="btn btn-primary selector-btn" id="btnIniciarJuego" onclick="iniciarDesdeSelector()">Empezar a jugar →</button>
     </div>
   </div>
 </div>
@@ -71,7 +98,6 @@
     <h2 class="subtitulo">Multijugador</h2>
     <button class="btn btn-small" onclick="reiniciarMulti()">↺ Nueva ronda</button>
   </div>
-
   <div class="scores">
     <div class="score-jugador" id="scoreJ1">
       <span class="score-nombre">Jugador 1</span>
@@ -83,10 +109,8 @@
       <span class="score-puntos" id="p2">0</span>
     </div>
   </div>
-
   <p id="turnoTexto" class="turno-texto"></p>
   <p id="mensajeMulti" class="mensaje"></p>
-
   <div class="contenedor-multi">
     <div class="panel-jugador" id="panelJ1">
       <div id="tablero1" class="tablero"></div>
@@ -96,7 +120,6 @@
       <div id="tablero2" class="tablero"></div>
     </div>
   </div>
-
   <div id="botonesMulti" class="botones-fin oculto">
     <button class="btn btn-primary" onclick="reiniciarMulti()">Siguiente ronda</button>
     <button class="btn btn-secondary" onclick="irMenu()">Menú</button>
